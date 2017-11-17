@@ -52,7 +52,7 @@ describe('index.test.js', () => {
     server.start()
     specs = Promise.all([
       swaggerParserMock('http://localhost:3333/v1.2/api-docs.json'),
-      swaggerParserMock(specV2)
+      swaggerParserMock({ spec: specV2 })
     ])
     getMock = (api) => {
       const res = api.responses['200'] || api.responses['default']

@@ -20,7 +20,7 @@ describe('entity.test.js', () => {
 
   beforeAll(() => {
     server.start()
-    spec = swaggerParserMock(specV2)
+    spec = swaggerParserMock({ spec: specV2 })
     specV1 = swaggerParserMock('http://localhost:3333/v1.2/api-docs.json')
     getRes = (api) => (api.responses['200'] || api.responses['default'])
     getAPI = (url, method, docs = spec) => {

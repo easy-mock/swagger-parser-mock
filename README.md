@@ -12,9 +12,9 @@
 
 ## API
 
-### swaggerParserMock(spec)
+### swaggerParserMock(url, opts)
 
-- `spec` 为 Swagger 文档的 `URL` 或 `JSON` 对象
+- 参数说明见 [swagger-js](https://github.com/swagger-api/swagger-js#constructor-and-methods)
 
 ```js
 const swaggerParserMock = require('swagger-parser-mock')
