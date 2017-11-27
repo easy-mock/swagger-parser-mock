@@ -1,7 +1,6 @@
 const path = require('path')
 const StaticServer = require('static-server')
 const swaggerParserMock = require('../lib')
-const specV2 = require('./specs/v2/petstore.json')
 
 const server = new StaticServer({
   rootPath: path.join(__dirname, 'specs'),
@@ -52,7 +51,7 @@ describe('index.test.js', () => {
     server.start()
     specs = Promise.all([
       swaggerParserMock('http://localhost:3333/v1.2/api-docs.json'),
-      swaggerParserMock({ spec: specV2 })
+      swaggerParserMock('http://localhost:3333/v2/petstore.yml')
     ])
     getMock = (api) => {
       const res = api.responses['200'] || api.responses['default']

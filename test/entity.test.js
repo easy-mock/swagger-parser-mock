@@ -5,7 +5,6 @@ const {
   getJavaScriptEntities,
   getObjectiveCEntities
 } = require('../lib/entity')
-const specV2 = require('./specs/v2/petstore.json')
 
 const server = new StaticServer({
   rootPath: path.join(__dirname, 'specs'),
@@ -20,7 +19,7 @@ describe('entity.test.js', () => {
 
   beforeAll(() => {
     server.start()
-    spec = swaggerParserMock({ spec: specV2 })
+    spec = swaggerParserMock('http://localhost:3333/v2/petstore.yml')
     specV1 = swaggerParserMock('http://localhost:3333/v1.2/api-docs.json')
     getRes = (api) => (api.responses['200'] || api.responses['default'])
     getAPI = (url, method, docs = spec) => {
