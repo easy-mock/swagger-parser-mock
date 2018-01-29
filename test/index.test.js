@@ -18,7 +18,7 @@ describe('index.test.js', () => {
       id: '@integer(60, 100)',
       name: '@string'
     },
-    name: '@string',
+    name: expect.any(String),
     photoUrls: ['@string'],
     tags: [{
       id: '@integer(60, 100)',
@@ -85,10 +85,12 @@ describe('index.test.js', () => {
   describe('v1.2 & v2', () => {
     test('/pet/findByStatus', done => {
       getAPI('/pet/findByStatus', 'get').then(result => {
-        result.forEach(res => {
+        result.forEach((res, index) => {
           const mock = getMock(res)
           expect(mock).toHaveLength(1)
           expect(mock[0]).toEqual(petSchema)
+          if (index === 0) expect(mock[0].name).toEqual('@string')
+          if (index === 1) expect(mock[0].name).toEqual('doggie')
         })
         done()
       })
@@ -96,9 +98,11 @@ describe('index.test.js', () => {
 
     test('/pet/{petId}', done => {
       getAPI('/pet/{petId}', 'get').then(result => {
-        result.forEach(res => {
+        result.forEach((res, index) => {
           const mock = getMock(res)
           expect(mock).toEqual(petSchema)
+          if (index === 0) expect(mock.name).toEqual('@string')
+          if (index === 1) expect(mock.name).toEqual('doggie')
         })
         done()
       })
