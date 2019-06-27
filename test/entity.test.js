@@ -18,9 +18,6 @@ describe('entity.test.js', () => {
   let getAPI
 
   beforeAll(() => {
-    server.start()
-    spec = swaggerParserMock('http://localhost:3333/v2/petstore.yml')
-    specV1 = swaggerParserMock('http://localhost:3333/v1.2/api-docs.json')
     getRes = (api) => (api.responses['200'] || api.responses['default'])
     getAPI = (url, method, docs = spec) => {
       return docs.then(res => {
@@ -35,6 +32,13 @@ describe('entity.test.js', () => {
         }
       })
     }
+    return new Promise((resolve) => {
+      server.start(() => {
+        spec = swaggerParserMock('http://localhost:3333/v2/petstore.yml')
+        specV1 = swaggerParserMock('http://localhost:3333/v1.2/api-docs.json')
+        resolve()
+      })
+    })
   })
 
   afterAll(() => {

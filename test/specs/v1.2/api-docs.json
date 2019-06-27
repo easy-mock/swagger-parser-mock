@@ -3,7 +3,7 @@
   "swaggerVersion": "1.2",
   "apis": [
     {
-      "path": "http://localhost:3333/v1.2/pet.json",
+      "path": "/pet.json",
       "description": "Operations about pets"
     },
     {

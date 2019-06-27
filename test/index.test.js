@@ -4,7 +4,7 @@ const swaggerParserMock = require('../lib')
 
 const server = new StaticServer({
   rootPath: path.join(__dirname, 'specs'),
-  port: 3333
+  port: 3334
 })
 
 describe('index.test.js', () => {
@@ -48,11 +48,6 @@ describe('index.test.js', () => {
   }
 
   beforeAll(() => {
-    server.start()
-    specs = Promise.all([
-      swaggerParserMock('http://localhost:3333/v1.2/api-docs.json'),
-      swaggerParserMock('http://localhost:3333/v2/petstore.yml')
-    ])
     getMock = (api) => {
       const res = api.responses['200'] || api.responses['default']
       if (!res) return
@@ -76,6 +71,15 @@ describe('index.test.js', () => {
         return apis
       })
     }
+    return new Promise((resolve) => {
+      server.start(() => {
+        specs = Promise.all([
+          swaggerParserMock('http://localhost:3334/v1.2/api-docs.json'),
+          swaggerParserMock('http://localhost:3334/v2/petstore.yml')
+        ])
+        resolve()
+      })
+    })
   })
 
   afterAll(() => {
