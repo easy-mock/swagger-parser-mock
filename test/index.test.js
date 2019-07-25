@@ -24,7 +24,7 @@ describe('index.test.js', () => {
       id: '@integer(60, 100)',
       name: '@string'
     }],
-    status: '@pick(["available","pending","sold"])'
+    status: '@pick("available","pending","sold")'
   }
 
   const orderSchema = {
@@ -33,7 +33,7 @@ describe('index.test.js', () => {
     petId: '@integer(60, 100)',
     quantity: '@integer(60, 100)',
     shipDate: '@datetime',
-    status: '@pick(["placed","approved","delivered"])'
+    status: '@pick("placed","approved","delivered")'
   }
 
   const userSchema = {
